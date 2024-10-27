@@ -1,0 +1,25 @@
+{
+    "metrics": [
+        {
+            "name": "activo",
+            "group": true,
+            "requires": 100,
+            "sums": "cargos",
+            "takes": "abonos"
+        },
+        {
+            "name": "Caja",
+            "group": false,
+            "requires": ["101-01-000"],
+            "sums": "cargos",
+            "takes": "abonos"
+        },
+        {
+            "name": "",
+            "group": false,
+            "requires": [],
+            "sums": "",
+            "takes": ""
+        }
+    ]
+}

@@ -20,6 +20,7 @@ export async function ParseData(file) {
     const max_rows = rows.e.r;
 
     const dataBook = await TransformData(worksheet, max_rows);
+    console.log(dataBook);
 
     return dataBook;
 }
