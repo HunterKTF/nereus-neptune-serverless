@@ -1,10 +1,10 @@
 import { MongoClient } from 'mongodb';
 
-let uri = process.env.MONGODB_URI;
+let uri = process.env.MONGODB_LOCAL;
 let dbName = process.env.MONGODB_DB;
 
 let cachedClient = null;
-let chachedDB = null;
+let cachedDB = null;
 
 if (!uri) {
   throw new Error(
@@ -23,10 +23,7 @@ export async function connectToDB() {
     return { client: cachedClient, db: cachedDB };
   }
 
-  const client = await MongoClient.connect(uri, {
-    useNewUrlParser: true,
-    useUnifyiedTopology: true,
-  });
+  const client = await MongoClient.connect(uri);
 
   const db = await client.db(dbName);
 

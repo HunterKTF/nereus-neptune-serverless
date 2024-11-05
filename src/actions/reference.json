@@ -8,18 +8,46 @@
             "takes": "abonos"
         },
         {
-            "name": "Caja",
-            "group": false,
-            "requires": ["101-01-000"],
+            "name": "pasivo",
+            "group": true,
+            "requires": 200,
+            "sums": "abonos",
+            "takes": "cargos"
+        },
+        {
+            "name": "capital contable",
+            "group": true,
+            "requires": 300,
+            "sums": "abonos",
+            "takes": "cargos"
+        },
+        {
+            "name": "ingresos",
+            "group": true,
+            "requires": 400,
+            "sums": "abonos",
+            "takes": "cargos"
+        },
+        {
+            "name": "costos",
+            "group": true,
+            "requires": 500,
             "sums": "cargos",
             "takes": "abonos"
         },
         {
-            "name": "",
-            "group": false,
-            "requires": [],
-            "sums": "",
-            "takes": ""
+            "name": "gastos",
+            "group": true,
+            "requires": 600,
+            "sums": "cargos",
+            "takes": "abonos"
+        },
+        {
+            "name": "resultado integral de financiamiento",
+            "group": true,
+            "requires": 700,
+            "sums": "cargos",
+            "takes": "abonos"
         }
     ]
 }
