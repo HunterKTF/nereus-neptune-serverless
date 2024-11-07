@@ -131,27 +131,26 @@ export async function ParseMetrics(dataBook, clientId) {
         // Temporal metric will act as row to append
         let tmp_metric = {};
 
-        // Check for metric condition as group or requirements
-        if (metrics_ref[line].group) {
-            // Decalre group constraints
-            let sums = metrics_ref[line].sums;
-            let takes = metrics_ref[line].takes;
-            let group = metrics_ref[line].requires;
+        // Decalre requirements constraints
+        let group = metrics_ref[line].group;
+        let req = metrics_ref[line].requires;
 
+        // Decalre group constraints
+        let sums = metrics_ref[line].sums;
+        let takes = metrics_ref[line].takes;
+
+        // Declare the accounts to iterate from
+        const accounts = dataBook[group];
+
+        // Check for metric condition as group or requirements
+        if (Number.isInteger(req)) {
             // Pass data to local function and extract temporal metric value
-            tmp_metric = await sumByGroup(group, dataBook, sums, takes);
+            tmp_metric = await sumByGroup(accounts, sums, takes);
 
         } else {
-            // Decalre requirements constraints
-            let sums = metrics_ref[line].sums;
-            let takes = metrics_ref[line].takes;
-            let req_list = metrics_ref[line].requires;
-
             // Pass data to local function and extract temporal metric value
-            tmp_metric = sumByReq(group, dataBook, sums, takes);
+            tmp_metric = await sumByReq(accounts, req, sums, takes);
 
-            // Test temporal metrics by requirement
-            // console.log(tmp_metric);
         }
 
         // Add parameters to temporal metric variable
@@ -166,66 +165,59 @@ export async function ParseMetrics(dataBook, clientId) {
     }
 
     // Test return of completed database metrics
-    console.log(db_metrics);
+    // console.log(db_metrics);
 
     // Return the ordered metrics
     return db_metrics;
 }
 
-async function sumByGroup(group, dataBook, sums, takes) {
-    const accounts = dataBook[group];
-    let group_ene = 0.0;
-    let group_feb = 0.0;
-    let group_mar = 0.0;
-    let group_abr = 0.0;
-    let group_may = 0.0;
-    let group_jun = 0.0;
-    let group_jul = 0.0;
-    let group_ago = 0.0;
-    let group_sep = 0.0;
-    let group_oct = 0.0;
-    let group_nov = 0.0;
-    let group_dic = 0.0;
-    let group_sum = 0.0;
+async function sumByGroup(accounts, sums, takes) {
+    let data_list = {
+        ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+        jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+    };
     let year = '';
 
     // Iterate over group elements
     for (let subaccount in accounts) {
-        group_ene += accounts[subaccount][sums].ene - accounts[subaccount][takes].ene;
-        group_feb += accounts[subaccount][sums].feb - accounts[subaccount][takes].feb;
-        group_mar += accounts[subaccount][sums].mar - accounts[subaccount][takes].mar;
-        group_abr += accounts[subaccount][sums].abr - accounts[subaccount][takes].abr;
-        group_may += accounts[subaccount][sums].may - accounts[subaccount][takes].may;
-        group_jun += accounts[subaccount][sums].jun - accounts[subaccount][takes].jun;
-        group_jul += accounts[subaccount][sums].jul - accounts[subaccount][takes].jul;
-        group_ago += accounts[subaccount][sums].ago - accounts[subaccount][takes].ago;
-        group_sep += accounts[subaccount][sums].sep - accounts[subaccount][takes].sep;
-        group_oct += accounts[subaccount][sums].oct - accounts[subaccount][takes].oct;
-        group_nov += accounts[subaccount][sums].nov - accounts[subaccount][takes].nov;
-        group_dic += accounts[subaccount][sums].dic - accounts[subaccount][takes].dic;
-        group_sum += accounts[subaccount][sums].sum - accounts[subaccount][takes].sum;
+        for (let index in data_list) {
+            data_list[index] += accounts[subaccount][sums][index] - accounts[subaccount][takes][index];
+        }
         year = accounts[subaccount]['year'];
     }
 
-    return { 
-        ene: group_ene.toFixed(2),
-        feb: group_feb.toFixed(2),
-        mar: group_mar.toFixed(2),
-        abr: group_abr.toFixed(2),
-        may: group_may.toFixed(2),
-        jun: group_jun.toFixed(2),
-        jul: group_jul.toFixed(2),
-        ago: group_ago.toFixed(2),
-        sep: group_sep.toFixed(2),
-        oct: group_oct.toFixed(2),
-        nov: group_nov.toFixed(2),
-        dic: group_dic.toFixed(2),
-        sum: group_sum.toFixed(2), 
-        year: year 
+    return {
+        ene: data_list.ene.toFixed(2), feb: data_list.feb.toFixed(2), mar: data_list.mar.toFixed(2),
+        abr: data_list.abr.toFixed(2), may: data_list.may.toFixed(2), jun: data_list.jun.toFixed(2),
+        jul: data_list.jul.toFixed(2), ago: data_list.ago.toFixed(2), sep: data_list.sep.toFixed(2),
+        oct: data_list.oct.toFixed(2), nov: data_list.nov.toFixed(2), dic: data_list.dic.toFixed(2),
+        sum: data_list.sum.toFixed(2), year: year
     };
 }
 
-async function sumByReq(group, dataBook, sums, takes) {
+async function sumByReq(accounts, req, sums, takes) {
+    let data_list = {
+        ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+        jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+    };
+    let year = '';
 
-    return {};
+    // Iterate over requirement list elements
+    for (let elements in req) {
+        let subaccount = req[elements];  // Declare subaccounts and verify existing data
+        if (accounts[subaccount]) {
+            for (let index in data_list) {
+                data_list[index] += accounts[subaccount][sums][index] - accounts[subaccount][takes][index];
+            }
+            year = accounts[subaccount]['year'];
+        }
+    }
+
+    return {
+        ene: data_list.ene.toFixed(2), feb: data_list.feb.toFixed(2), mar: data_list.mar.toFixed(2),
+        abr: data_list.abr.toFixed(2), may: data_list.may.toFixed(2), jun: data_list.jun.toFixed(2),
+        jul: data_list.jul.toFixed(2), ago: data_list.ago.toFixed(2), sep: data_list.sep.toFixed(2),
+        oct: data_list.oct.toFixed(2), nov: data_list.nov.toFixed(2), dic: data_list.dic.toFixed(2),
+        sum: data_list.sum.toFixed(2), year: year
+    };
 }
