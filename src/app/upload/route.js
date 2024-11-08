@@ -14,9 +14,6 @@ async function uploadToMongo(metrics) {
     // Upload data
     const result = await myColl.insertMany(metrics);
 
-    // Close MongoDB connection
-    client.close();
-
     // Return the message of successfull upload
     return { message: `${result.insertedCount} documents were inserted.` };
   } catch (e) {
