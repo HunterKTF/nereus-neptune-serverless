@@ -28,29 +28,35 @@ async function uploadToMongo(metrics) {
 
 // POST method to upload Contpaqi file
 export async function POST(request) {
-  const formData = await request.formData();  // Get form-data from body
+  try {
+    const formData = await request.formData();  // Get form-data from body
 
-  // Extract data
-  const clientId = formData.get('clientId');
-  const file = formData.get('file');
+    // Extract data
+    const clientId = formData.get('clientId');
+    const file = formData.get('file');
+    // console.log(file);
 
-  // Check if file is uploaded correctly
-  if (!file) {
-    console.log('No file was uploaded');
-    return Response.json({ error: "No file encountered in form-data" }, { status: 404 });
-  } else {
-    // Get file data from buffer and parse data
-    const buffer = Buffer.from(await file.arrayBuffer());
+    // Check if file is uploaded correctly
+    if (!file) {
+      console.log('No file was uploaded');
+      return Response.json({ error: "No file encountered in form-data" }, { status: 404 });
+    } else {
+      // Get file data from buffer and parse data
+      const buffer = Buffer.from(await file.arrayBuffer());
 
-    // Parse data into a dictionary
-    const dataBook = await ParseData(buffer);
+      // Parse data into a dictionary
+      const dataBook = await ParseData(buffer);
 
-    // Parse dataBook into metrics to post to MongoDB
-    const metrics = await ParseMetrics(dataBook, clientId);
+      // Parse dataBook into metrics to post to MongoDB
+      const metrics = await ParseMetrics(dataBook, clientId);
 
-    // Upload transformed metrics into MongoDB
-    const response = await uploadToMongo(metrics);
+      // Upload transformed metrics into MongoDB
+      const response = await uploadToMongo(metrics);
 
-    return Response.json(response);
+      return Response.json(response);
+    }
+  } catch (e) {
+    console.log(e);
+    return Response.json({ message: "Could not upload file" });
   }
 }
