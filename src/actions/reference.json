@@ -22,6 +22,20 @@
             "takes": "abonos"
         },
         {
+            "name": "inversiones",
+            "group": 100,
+            "requires": ["103-01-000", "103-02-000", "103-03-000"],
+            "sums": "cargos",
+            "takes": "abonos"
+        },
+        {
+            "name": "clientes",
+            "group": 100,
+            "requires": ["105-01-000", "105-02-000"],
+            "sums": "cargos",
+            "takes": "abonos"
+        },
+        {
             "name": "pasivo",
             "group": 200,
             "requires": 200,
