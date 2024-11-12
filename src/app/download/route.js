@@ -23,7 +23,7 @@ async function readFromMongo(params) {
         // Print a message if no documents were found
         if ((await myColl.countDocuments(query)) === 0) {
             console.log("No documents found!");
-            return { message: "No documents found!" };
+            return { message: "No documents found!", data: [], error: [] };
         }
 
         // Iterate over found elements
@@ -31,16 +31,17 @@ async function readFromMongo(params) {
             response.push(doc);
         }
 
-        console.log(response);
+        // Print the retrieved data in console
+        // console.log(response);
 
         // Return the message of successfull upload
-        return { message: response };
+        return { message: "Documents retrieved", data: response, error: [] };
     } catch (e) {
         // Print error message and correctly uploaded docs
         console.log(`Error making a query of multiple documents.`);
         console.log(e);
 
-        return { message: e };
+        return { message: "Error while retrieving your data", data: [], error: [] };
     }
 }
 
