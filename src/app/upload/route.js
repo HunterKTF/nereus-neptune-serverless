@@ -15,13 +15,13 @@ async function uploadToMongo(metrics) {
     const result = await myColl.insertMany(metrics);
 
     // Return the message of successfull upload
-    return { message: `${result.insertedCount} documents were inserted.` };
+    return { message: `${result.insertedCount} documents were inserted.`, status: 200 };
   } catch (e) {
     // Print error message and correctly uploaded docs
     console.log(`A MongoBulkWriteException occurred, but there are successfully processed documents.`);
     console.log(e);
 
-    return { message: e };
+    return { message: "Error uploading documents", status: 500 };
   }
 }
 
@@ -57,6 +57,6 @@ export async function POST(request) {
     }
   } catch (e) {
     console.log(e);
-    return Response.json({ message: "Could not upload file" });
+    return Response.json({ message: "Could not upload file", status: 400 });
   }
 }

@@ -41,7 +41,7 @@ async function readFromMongo(params) {
         console.log(`Error making a query of multiple documents.`);
         console.log(e);
 
-        return { message: "Error while retrieving your data", data: [], error: [] };
+        return { message: "Error while retrieving your data", data: [], error: [e] };
     }
 }
 
