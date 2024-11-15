@@ -48,13 +48,18 @@ async function readFromMongo(params) {
 
 // GET function to retrieve client data
 export async function POST(request) {
-    let formData = await request.formData();  // Get form-data from body
+    try {
+        let formData = await request.formData();  // Get form-data from body
 
-    // Extract data from form
-    const clientId = formData.get('clientId');
+        // Extract data from form
+        const clientId = formData.get('clientId');
 
-    // Retrieve metrics from MongoDB
-    const response = await readFromMongo(clientId);
+        // Retrieve metrics from MongoDB
+        const response = await readFromMongo(clientId);
 
-    return Response.json(response);
+        return Response.json(response);
+    } catch (e) {
+        console.log(e);
+        return Response.json({ message: "Could not download data correctly", status: 400 });
+    }
 }
