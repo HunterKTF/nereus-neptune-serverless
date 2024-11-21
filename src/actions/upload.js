@@ -122,6 +122,7 @@ export async function TransformData(worksheet, max_rows) {
 export async function ParseMetrics(dataBook, clientId) {
     // Declare global variables
     let db_metrics = [];
+    let index_metrics = {};
 
     // Get the metrics conditions from json file
     const metrics_ref = reference.metrics;
@@ -159,6 +160,9 @@ export async function ParseMetrics(dataBook, clientId) {
 
         // Check if data is available
         if (tmp_metric.year !== '') {
+            // Create global metrics index
+            index_metrics[tmp_metric.name] = tmp_metric;
+
             // Add metric to dabatase metrics
             db_metrics.push(tmp_metric);
         }
@@ -166,6 +170,7 @@ export async function ParseMetrics(dataBook, clientId) {
 
     // Test return of completed database metrics
     // console.log(db_metrics);
+    console.log(index_metrics);
 
     // Return the ordered metrics
     return db_metrics;
@@ -205,7 +210,7 @@ async function sumByReq(accounts, req, sums, takes) {
     // Iterate over requirement list elements
     for (let elements in req) {
         let subaccount = req[elements];  // Declare subaccounts and verify existing data
-        if (accounts[subaccount]) {
+        if (subaccount in accounts) {  // Check if subaccount exists
             for (let index in data_list) {
                 data_list[index] += accounts[subaccount][sums][index] - accounts[subaccount][takes][index];
             }
@@ -220,4 +225,8 @@ async function sumByReq(accounts, req, sums, takes) {
         oct: data_list.oct.toFixed(2), nov: data_list.nov.toFixed(2), dic: data_list.dic.toFixed(2),
         sum: data_list.sum.toFixed(2), year: year
     };
+}
+
+async function ParseIndicators(metrics) {
+    return [];
 }

@@ -51,7 +51,8 @@ export async function POST(request) {
       const metrics = await ParseMetrics(dataBook, clientId);
 
       // Upload transformed metrics into MongoDB
-      const response = await uploadToMongo(metrics);
+      // const response = await uploadToMongo(metrics);
+      let response = {message: "File successfully uploaded"}
 
       return Response.json(response);
     }

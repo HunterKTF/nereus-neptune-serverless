@@ -1,0 +1,8 @@
+{
+    "indicators": [
+        {
+            "name": "Utilidad Bruta",
+            "requires": ["Ventas", "Costo de venta"]
+        }
+    ]
+}
