@@ -1,8 +1,91 @@
 {
     "indicators": [
         {
-            "name": "Utilidad Bruta",
+            "name": "Utilidad bruta",
             "requires": ["Ventas", "Costo de venta"]
+        },
+        {
+            "name": "Utilidad operativa",
+            "requires": ["Ventas", "Costo de venta", "Gastos operativos"]
+        },
+        {
+            "name": "Utilidad neta",
+            "requires": ["Ventas", "Costo de venta", "Gastos operativos", "Intereses", "Impuestos"]
+        },
+        {
+            "name": "ROE",
+            "requires": ["Capital total"]
+        },
+        {
+            "name": "ROA",
+            "requires": ["Activos totales"]
+        },
+        {
+            "name": "Rotacion de activos",
+            "requires": ["Ventas", "Activos totales"]
+        },
+        {
+            "name": "Rotacion cuentas por cobrar",
+            "requires": ["Ventas", "Cuentas por cobrar"]
+        },
+        {
+            "name": "Rotacion cuentas por pagar",
+            "requires": ["Costo de venta", "Cuentas por pagar"]
+        },
+        {
+            "name": "Razon circulante",
+            "requires": ["Activos circulantes", "Pasivos circulantes"]
+        },
+        {
+            "name": "Razon rapida",
+            "requires": ["Activos circulantes", "Inventarios", "Pasivos circulantes"]
+        },
+        {
+            "name": "Cobertura deuda",
+            "requires": ["Intereses", "Depreciacion", "Amortizacion"]
+        },
+        {
+            "name": "Dias cuentas por cobrar",
+            "requires": ["Rotacion cuentas por cobrar"],
+            "indicator": true
+        },
+        {
+            "name": "Dias de inventario",
+            "requires": ["Rotacion de inventarios"],
+            "indicator": true
+        },
+        {
+            "name": "Dias cuentas por pagar",
+            "requires": ["Rotacion cuentas por pagar"],
+            "indicator": true
+        },
+        {
+            "name": "Ciclo conversion de efectivo",
+            "requires": ["Dias cuentas por cobrar", "Dias de inventario", "Dias cuentas por pagar"],
+            "indicator": true
+        },
+        {
+            "name": "Capital empleado",
+            "requires": ["Activos totales", "Pasivos circulantes"]
+        },
+        {
+            "name": "Rotacion de capital empleado",
+            "requires": ["Ventas", "Capital empleado"],
+            "indicator": true
+        },
+        {
+            "name": "ROCE",
+            "requires": ["Utilidad operativa", "Capital empleado"],
+            "indicator": true
+        },
+        {
+            "name": "Razon de apalancamiento",
+            "requires": ["Capital total", "Pasivos totales"]
+        },
+        {
+            "name": "Deuda Neta EBIT",
+            "requires": ["Deuda", "Efectivo", "Utilidad operativa"],
+            "indicator": true
         }
     ]
 }
