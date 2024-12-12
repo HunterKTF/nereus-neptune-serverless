@@ -1,0 +1,14 @@
+{
+    "indicators": [
+        {
+            "code": "utilidad_bruta",
+            "name": "Utilidad bruta",
+            "indicator": false
+        },
+        {
+            "code": "utilidad_operativa",
+            "name": "Utilidad operativa",
+            "indicator": true
+        }
+    ]
+}

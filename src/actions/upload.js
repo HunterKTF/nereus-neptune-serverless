@@ -2,6 +2,8 @@
 
 import XLSX from "xlsx";
 import reference from './reference.json';
+import kpiBlueprints from './kpiBlueprints.json';
+import { fun_indicators } from "./kpiFunctions";
 
 export async function ParseData(file) {
     // Read sheet file from buffer
@@ -140,8 +142,23 @@ export async function ParseMetrics(dataBook, clientId) {
         let sums = metrics_ref[line].sums;
         let takes = metrics_ref[line].takes;
 
-        // Declare the accounts to iterate from
-        const accounts = dataBook[group];
+        let accounts;
+
+        // Redirect to function with multiple groups
+        if (Number.isInteger(group)) {
+            // Declare the accounts to iterate from
+            accounts = dataBook[group];
+        } else {
+            accounts = {};
+            // Get accounts into a bigger book
+            for (let idx in group) {
+                let current_group = group[idx];
+                let book = dataBook[current_group];
+                for (let account in book) {
+                    accounts[account] = book[account];
+                }
+            }
+        }
 
         // Check for metric condition as group or requirements
         if (Number.isInteger(req)) {
@@ -170,7 +187,9 @@ export async function ParseMetrics(dataBook, clientId) {
 
     // Test return of completed database metrics
     // console.log(db_metrics);
-    console.log(index_metrics);
+    // console.log(index_metrics);
+
+    ParseIndicators(index_metrics);
 
     // Return the ordered metrics
     return db_metrics;
@@ -228,5 +247,21 @@ async function sumByReq(accounts, req, sums, takes) {
 }
 
 async function ParseIndicators(metrics) {
+    let kpi_index = {};
+    let indicators = kpiBlueprints.indicators;
+
+    let res;
+    for (let kpi in indicators) {
+        let i = indicators[kpi];
+        if (i.indicator) {
+            res = fun_indicators[i.code](i.name, metrics, kpi_index);
+        } else {
+            res = fun_indicators[i.code](i.name, metrics);
+        }
+        kpi_index[i.code] = res;
+    }
+
+    console.log(kpi_index);
+
     return [];
 }
