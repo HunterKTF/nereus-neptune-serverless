@@ -9,6 +9,101 @@
             "code": "utilidad_operativa",
             "name": "Utilidad operativa",
             "indicator": true
+        },
+        {
+            "code": "utilidad_neta",
+            "name": "Utilidad neta",
+            "indicator": true
+        },
+        {
+            "code": "roe",
+            "name": "ROE",
+            "indicator": true
+        },
+        {
+            "code": "roa",
+            "name": "ROA",
+            "indicator": true
+        },
+        {
+            "code": "rotacion_de_activos",
+            "name": "Rotacion de activos",
+            "indicator": false
+        },
+        {
+            "code": "rotacion_de_inventarios",
+            "name": "Rotacion de inventarios",
+            "indicator": false
+        },
+        {
+            "code": "rotacion_cuentas_por_cobrar",
+            "name": "Rotacion cuentas por cobrar",
+            "indicator": false
+        },
+        {
+            "code": "rotacion_cuentas_por_pagar",
+            "name": "Rotacion cuentas por pagar",
+            "indicator": false
+        },
+        {
+            "code": "razon_circulante",
+            "name": "Razon circulante",
+            "indicator": false
+        },
+        {
+            "code": "razon_rapida",
+            "name": "Razon rapida",
+            "indicator": false
+        },
+        {
+            "code": "cobertura_deuda",
+            "name": "Cobertura deuda",
+            "indicator": true
+        },
+        {
+            "code": "dias_cuentas_por_cobrar",
+            "name": "Dias cuentas por cobrar",
+            "indicator": true
+        },
+        {
+            "code": "dias_de_inventario",
+            "name": "Dias de inventario",
+            "indicator": true
+        },
+        {
+            "code": "dias_cuentas_por_pagar",
+            "name": "Dias cuentas por pagar",
+            "indicator": true
+        },
+        {
+            "code": "ciclo_conversion_de_efectivo",
+            "name": "Ciclo conversion de efectivo",
+            "indicator": true
+        },
+        {
+            "code": "capital_empleado",
+            "name": "Capital empleado",
+            "indicator": false
+        },
+        {
+            "code": "rotacion_de_capital_empleado",
+            "name": "Rotacion de capital empleado",
+            "indicator": true
+        },
+        {
+            "code": "roce",
+            "name": "ROCE",
+            "indicator": true
+        },
+        {
+            "code": "razon_de_apalancamiento",
+            "name": "Razon de apalancamiento",
+            "indicator": false
+        },
+        {
+            "code": "deuda_neta_ebit",
+            "name": "Deuda Neta EBIT",
+            "indicator": true
         }
     ]
 }

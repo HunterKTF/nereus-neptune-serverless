@@ -12,7 +12,7 @@ export const fun_indicators = {
             res[i] = ingresos[i] - costo_de_venta[i];
         }
 
-        console.log(`Calculando... ${name}:`)
+        console.log(`Calculando... ${name}:`);
         return res;
     },
     utilidad_operativa: (name, metrics, indicators) => {
@@ -33,375 +33,321 @@ export const fun_indicators = {
             res[i] = utilidad_bruta[i] - gastos[i] - depreciacion_contable[i] - amortizacion_contable[i];
         }
 
+        console.log(`Calculando... ${name}`);
+        return res;
+    },
+    utilidad_neta: (name, metrics, indicators) => {
+        let utilidad_operativa = indicators['utilidad_operativa'];
+        let intereses = metrics['Intereses'];
+        let impuestos = metrics['Impuestos'];
+
+        let res = {
+            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+        };
+
+        for (let i in res) {
+            res[i] = utilidad_operativa[i] - intereses[i] - impuestos[i];
+        }
+
+        console.log(`Calculando... ${name}`);
+        return res;
+    },
+    roe: (name, metrics, indicators) => {
+        let utilidad_neta = indicators['utilidad_neta']
+        let capital_contable = metrics['Capital contable'];
+
+        let res = {
+            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+        };
+
+        for (let i in res) {
+            res[i] = utilidad_neta[i] / capital_contable[i];
+        }
+
+        console.log(`Calculando... ${name}`);
+        return res;
+    },
+    roa: (name, metrics, indicators) => {
+        let utilidad_neta = indicators['utilidad_neta'];
+        let activos_totales = metrics['Activo'];
+
+        let res = {
+            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+        };
+
+        for (let i in res) {
+            res[i] = utilidad_neta[i] / activos_totales[i];
+        }
+
+        console.log(`Calculando... ${name}`);
+        return res;
+    },
+    rotacion_de_activos: (name, metrics) => {
+        let ventas = metrics['Ingresos'];
+        let activos_totales = ['Activo'];
+
+        let res = {
+            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+        };
+
+        for (let i in res) {
+            res[i] = ventas[i] / activos_totales[i];
+        }
+
+        console.log(`Calculando... ${name}`);
+        return res;
+    },
+    rotacion_de_inventarios: (name, metrics) => {
+        let costo_de_venta = metrics['Costo de venta y/o servicio'];
+        let inventario = metrics['Inventario'];
+
+        let res = {
+            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+        };
+
+        for (let i in res) {
+            res[i] = costo_de_venta[i] / inventario[i];
+        }
+
+        console.log(`Calculando... ${name}`);
+        return res;
+    },
+    rotacion_cuentas_por_cobrar: (name, metrics) => {
+        let cuentas_por_cobrar = metrics['Cuentas y documentos por cobrar a c.p.'];
+        let ventas = metrics['Ingresos'];
+
+        let res = {
+            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+        };
+
+        for (let i in res) {
+            res[i] = ventas[i] / cuentas_por_cobrar[i];
+        }
+
+        console.log(`Calculando... ${name}`);
+        return res;
+    },
+    rotacion_cuentas_por_pagar: (name, metrics) => {
+        let costo_de_venta = metrics['Costo de venta y/o servicio'];
+        let cuentas_por_pagar = metrics['Cuentas por pagar a corto plazo'];
+
+        let res = {
+            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+        };
+
+        for (let i in res) {
+            res[i] = costo_de_venta[i] / cuentas_por_pagar[i];
+        }
+
+        console.log(`Calculando... ${name}`);
+        return res;
+    },
+    razon_circulante: (name, metrics) => {
+        let activos_circulantes = metrics['Activo a corto plazo'];
+        let pasivos_circulantes = metrics['Pasivo a corto plazo'];
+
+        let res = {
+            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+        };
+
+        for (let i in res) {
+            res[i] = activos_circulantes[i] / pasivos_circulantes[i];
+        }
+
+        console.log(`Calculando... ${name}`);
+        return res;
+    },
+    razon_rapida: (name, metrics) => {
+        let activos_circulantes = metrics['Activo a corto plazo'];
+        let inventario = metrics['Inventario'];
+        let pasivos_circulantes = metrics['Pasivo a corto plazo'];
+
+        let res = {
+            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+        };
+
+        let tmp_val = 0.0;
+
+        for (let i in res) {
+            tmp_val = activos_circulantes[i] - inventario[i];
+            res[i] = tmp_val / pasivos_circulantes[i];
+        }
+
+        console.log(`Calculando... ${name}`);
+        return res;
+    },
+    cobertura_deuda: (name, metrics, indicators) => {
+        let utilidad_operativa = indicators['utilidad_operativa'];
+        let intereses = metrics['Intereses'];
+
+        let res = {
+            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+        };
+
+        for (let i in res) {
+            res[i] = utilidad_operativa[i] / intereses[i];
+        }
+
+        console.log(`Calculando... ${name}`);
+        return res;
+    },
+    dias_cuentas_por_cobrar: (name, metrics, indicators) => {
+        let rotacion_cuentas_por_cobrar = indicators['rotacion_cuentas_por_cobrar'];
+
+        let res = {
+            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+        };
+
+        for (let i in res) {
+            res[i] = 365 / rotacion_cuentas_por_cobrar[i];
+        }
+
         console.log(`Calculando... ${name}`)
+        return res;
+    },
+    dias_de_inventario: (name, metrics, indicators) => {
+        let rotacion_de_inventarios = indicators['rotacion_de_inventarios'];
+
+        let res = {
+            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+        };
+
+        for (let i in res) {
+            res[i] = 365 / rotacion_de_inventarios[i];
+        }
+
+        console.log(`Calculando... ${name}`)
+        return res;
+    },
+    dias_cuentas_por_pagar: (name, metrics, indicators) => {
+        let rotacion_cuentas_por_pagar = indicators['rotacion_cuentas_por_pagar'];
+
+        let res = {
+            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+        };
+
+        for (let i in res) {
+            res[i] = 365 / rotacion_cuentas_por_pagar[i];
+        }
+
+        console.log(`Calculando... ${name}`);
+        return res;
+    },
+    ciclo_conversion_de_efectivo: (name, metrics, indicators) => {
+        let dias_cuentas_por_cobrar = indicators['dias_cuentas_por_cobrar'];
+        let dias_de_inventario = indicators['dias_de_inventario'];
+        let dias_cuentas_por_pagar = indicators['dias_cuentas_por_pagar'];
+
+        let res = {
+            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+        };
+
+        for (let i in res) {
+            res[i] = dias_cuentas_por_cobrar[i] + dias_de_inventario[i] - dias_cuentas_por_pagar[i];
+        }
+
+        console.log(`Calculando... ${name}`);
+        return res;
+    },
+    capital_empleado: (name, metrics) => {
+        let activos_totales = ['Activo'];
+        let pasivos_circulantes = metrics['Pasivo a corto plazo'];
+
+        let res = {
+            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+        };
+
+        for (let i in res) {
+            res[i] = activos_totales[i] - pasivos_circulantes[i];
+        }
+
+        console.log(`Calculando... ${name}`);
+        return res;
+    },
+    rotacion_de_capital_empleado: (name, metrics, indicators) => {
+        let ventas = metrics['Ingresos'];
+        let capital_empleado = indicators['capital_empleado'];
+
+        let res = {
+            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+        };
+
+        for (let i in res) {
+            res[i] = ventas[i] - capital_empleado[i];
+        }
+
+        console.log(`Calculando... ${name}`);
+        return res;
+    },
+    roce: (name, metrics) => {
+        let utilidad_operativa = indicators['utilidad_operativa'];
+        let capital_empleado = indicators['capital_empleado'];
+
+        let res = {
+            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+        };
+
+        const ISR = 0.3;
+        const const_val = 1 - ISR;
+
+        for (let i in res) {
+            res[i] = utilidad_operativa[i] * const_val / capital_empleado[i];
+        }
+
+        console.log(`Calculando... ${name}`);
+        return res;
+    },
+    razon_de_apalancamiento: (name, metrics) => {
+        let pasivos_totales = metrics['Pasivo'];
+        let capital_contable = metrics['Capital contable'];
+
+        let res = {
+            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+        };
+
+        for (let i in res) {
+            res[i] = pasivos_totales[i] / capital_contable[i];
+        }
+
+        console.log(`Calculando... ${name}`);
+        return res;
+    },
+    deuda_neta_ebit: (name, metrics, indicators) => {
+        let deuda = metrics['Deuda total'];
+        let efectivo = metrics['Caja'];
+        let utilidad_operativa = indicators['utilidad_operativa'];
+
+        let res = {
+            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+        };
+
+        let tmp_val = 0.0;
+
+        for (let i in res) {
+            tmp_val = deuda[i] - efectivo[i];
+            res[i] = tmp_val / utilidad_operativa[i];
+        }
+
+        console.log(`Calculando... ${name}`);
         return res;
     }
 }
-
-/* JSON
-{
-    "code": "utilidad_neta",
-    "name": "Utilidad neta",
-    "indicator": true
-},
-{
-    "code": "roe",
-    "name": "ROE",
-    "indicator": false
-},
-{
-    "code": "roa",
-    "name": "ROA",
-    "indicator": false
-},
-{
-    "code": "rotacion_de_activos",
-    "name": "Rotacion de activos",
-    "indicator": false
-},
-{
-    "code": "rotacion_de_inventarios",
-    "name": "Rotacion de inventarios",
-    "indicator": false
-},
-{
-    "code": "rotacion_cuentas_por_cobrar",
-    "name": "Rotacion cuentas por cobrar",
-    "indicator": false
-},
-{
-    "code": "rotacion_cuentas_por_pagar",
-    "name": "Rotacion cuentas por pagar",
-    "indicator": false
-},
-{
-    "code": "razon_circulante",
-    "name": "Razon circulante",
-    "indicator": false
-},
-{
-    "code": "razon_rapida",
-    "name": "Razon rapida",
-    "indicator": false
-},
-{
-    "code": "cobertura_deuda",
-    "name": "Cobertura deuda",
-    "indicator": false
-},
-{
-    "code": "dias_cuentas_por_cobrar",
-    "name": "Dias cuentas por cobrar",
-    "indicator": true
-},
-{
-    "code": "dias_de_inventario",
-    "name": "Dias de inventario",
-    "indicator": true
-},
-{
-    "code": "dias_cuentas_por_pagar",
-    "name": "Dias cuentas por pagar",
-    "indicator": true
-},
-{
-    "code": "ciclo_conversion_de_efectivo",
-    "name": "Ciclo conversion de efectivo",
-    "indicator": true
-},
-{
-    "code": "capital_empleado",
-    "name": "Capital empleado",
-    "indicator": false
-},
-{
-    "code": "rotacion_de_capital_empleado",
-    "name": "Rotacion de capital empleado",
-    "indicator": true
-},
-{
-    "code": "roce",
-    "name": "ROCE",
-    "indicator": true
-},
-{
-    "code": "razon_de_apalancamiento",
-    "name": "Razon de apalancamiento",
-    "indicator": false
-},
-{
-    "code": "deuda_neta_ebit",
-    "name": "Deuda Neta EBIT",
-    "indicator": true
-}
-*/
-
-/*  KPI Functions
-    utilidad_neta: (name, metrics) => {
-        let ventas = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let costo_de_venta = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let gastos_operativos = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let intereses = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let impuestos = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-
-        console.log(`Calculando... ${name}`)
-        return {};
-    },
-    roe: (name, metrics) => {
-        let utilidad_neta = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let capital_total = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-
-        console.log(`Calculando... ${name}`)
-        return {};
-    },
-    roa: (name, metrics) => {
-        let utilidad_neta = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let activos_totales = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-
-        console.log(`Calculando... ${name}`)
-        return {};
-    },
-    rotacion_de_activos: (name, metrics) => {
-        let ventas = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let activos_totales = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-
-        console.log(`Calculando... ${name}`)
-        return {};
-    },
-    rotacion_de_inventarios: (name, metrics) => {
-        let costo_de_venta = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let inventario = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-
-        console.log(`Calculando... ${name}`)
-        return {};
-    },
-    rotacion_cuentas_por_cobrar: (name, metrics) => {
-        let cuentas_por_cobrar = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let ventas = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-
-        console.log(`Calculando... ${name}`)
-        return {};
-    },
-    rotacion_cuentas_por_pagar: (name, metrics) => {
-        let costo_de_venta = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let cuentas_por_pagar = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-
-        console.log(`Calculando... ${name}`)
-        return {};
-    },
-    razon_circulante: (name, metrics) => {
-        let activos_circulantes = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let pasivos_circulantes = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-
-        console.log(`Calculando... ${name}`)
-        return {};
-    },
-    razon_rapida: (name, metrics) => {
-        let activos_circulantes = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let inventario = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let pasivos_circulantes = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-
-        console.log(`Calculando... ${name}`)
-        return {};
-    },
-    cobertura_deuda: (name, metrics) => {
-        let intereses = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let depreciacion = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let amortizacion = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let utilidad_operativa = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-
-        console.log(`Calculando... ${name}`)
-        return {};
-    },
-    dias_cuentas_por_cobrar: (name, metrics) => {
-        let rotacion_cuentas_por_cobrar = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-
-        console.log(`Calculando... ${name}`)
-        return {};
-    },
-    dias_de_inventario: (name, metrics) => {
-        let rotacion_de_inventarios = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-
-        console.log(`Calculando... ${name}`)
-        return {};
-    },
-    dias_cuentas_por_pagar: (name, metrics) => {
-        let rotacion_cuentas_por_pagar = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-
-        console.log(`Calculando... ${name}`)
-        return {};
-    },
-    ciclo_conversion_de_efectivo: (name, metrics) => {
-        let dias_cuentas_por_cobrar = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let dias_de_inventario = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let dias_cuentas_por_pagar = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-
-        console.log(`Calculando... ${name}`)
-        return {};
-    },
-    capital_empleado: (name, metrics) => {
-        let activos_totales = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let pasivos_circulantes = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-
-        console.log(`Calculando... ${name}`)
-        return {};
-    },
-    rotacion_de_capital_empleado: (name, metrics) => {
-        let ventas = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let capital_empleado = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-
-        console.log(`Calculando... ${name}`)
-        return {};
-    },
-    roce: (name, metrics) => {
-        let utilidad_operativa = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let capital_empleado = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-
-        console.log(`Calculando... ${name}`)
-        return {};
-    },
-    razon_de_apalancamiento: (name, metrics) => {
-        let pasivos_totales = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let capital_total = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-
-        console.log(`Calculando... ${name}`)
-        return {};
-    },
-    deuda_neta_ebit: (name, metrics) => {
-        let deuda = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let efectivo = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-        let utilidad_operativa = {
-            ene: 10.0, feb: 10.0, mar: 10.0, abr: 10.0, may: 10.0, jun: 10.0,
-            jul: 10.0, ago: 10.0, sep: 10.0, oct: 10.0, nov: 10.0, dic: 10.0, sum: 10.0
-        };
-
-        console.log(`Calculando... ${name}`)
-        return {};
-    }
-*/
