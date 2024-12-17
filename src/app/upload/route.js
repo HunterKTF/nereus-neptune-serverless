@@ -5,17 +5,22 @@ import { connectToDB } from "@/utils/mongodb";
 
 
 // Function to upload data to MongoDB
-async function uploadToMongo(metrics) {
+async function uploadToMongo(metrics, kpis) {
   try {
     // Begin MongoDB connection to metrics collection
     const { client, db } = await connectToDB();
-    const myColl = db.collection(process.env.MONGODB_COLL);
+    const metricsColl = db.collection(process.env.MONGODB_COLL_MET);
+    const kpiColl = db.collection(process.env.MONGODB_COLL_KPI);
 
-    // Upload data
-    const result = await myColl.insertMany(metrics);
+    // Upload metrics
+    const metricsRes = await metricsColl.insertMany(metrics);
+    console.log(`${metricsRes.insertedCount} documents were inserted.`);
+    
+    // Upload kpis
+    const kpiRes = await kpiColl.insertMany(kpis);
+    console.log(`${kpiRes.insertedCount} documents were inserted.`);
 
-    // Return the message of successfull upload
-    return { message: `${result.insertedCount} documents were inserted.`, status: 200 };
+    return { message: `${metricsRes.insertedCount} metrics were inserted. ${kpiRes.insertedCount} KPIs were inserted`, status: 200 };
   } catch (e) {
     // Print error message and correctly uploaded docs
     console.log(`A MongoBulkWriteException occurred, but there are successfully processed documents.`);
@@ -49,11 +54,10 @@ export async function POST(request) {
 
       // Parse dataBook into metrics to post to MongoDB
       const [metrics, kpis] = await ParseMetrics(dataBook, clientId);
-      console.log(kpis);
 
       // Upload transformed metrics into MongoDB
-      // const response = await uploadToMongo(metrics);
-      let response = {message: "File successfully uploaded"}
+      const response = await uploadToMongo(metrics, kpis);
+      // let response = { message: "File successfully uploaded" }
 
       return Response.json(response);
     }

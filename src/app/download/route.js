@@ -9,33 +9,47 @@ async function readFromMongo(params) {
     const { client, db } = await connectToDB();
 
     // Declare group data array
-    let response = [];
+    let metrics = [];
+    let kpis = [];
 
     try {
-        const myColl = db.collection(process.env.MONGODB_COLL);
+        const metricsColl = db.collection(process.env.MONGODB_COLL_MET);
+        const kpiColl = db.collection(process.env.MONGODB_COLL_KPI);
 
         // Define the query to look
         const query = { client_id: { $eq: params } };
 
         // find code goes here
-        const cursor = myColl.find(query);
+        const cursor = metricsColl.find(query);
+        const cursor2 = kpiColl.find(query);
 
         // Print a message if no documents were found
-        if ((await myColl.countDocuments(query)) === 0) {
+        if ((await metricsColl.countDocuments(query)) === 0) {
+            console.log("No documents found!");
+            return { message: "No documents found!", data: [], error: [] };
+        }
+
+        // Print a message if no documents were found
+        if ((await kpiColl.countDocuments(query)) === 0) {
             console.log("No documents found!");
             return { message: "No documents found!", data: [], error: [] };
         }
 
         // Iterate over found elements
         for await (const doc of cursor) {
-            response.push(doc);
+            metrics.push(doc);
+        }
+
+        // Iterate over found elements
+        for await (const doc of cursor2) {
+            kpis.push(doc);
         }
 
         // Print the retrieved data in console
-        // console.log(response);
+        // console.log(metrics);
 
         // Return the message of successfull upload
-        return { message: "Documents retrieved", data: response, error: [] };
+        return { message: "Documents retrieved", data: [{metrics: metrics}, {kpis: kpis}], error: [] };
     } catch (e) {
         // Print error message and correctly uploaded docs
         console.log(`Error making a query of multiple documents.`);

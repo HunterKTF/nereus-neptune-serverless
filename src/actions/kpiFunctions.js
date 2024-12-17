@@ -1,8 +1,8 @@
 export const fun_indicators = {
     utilidad_bruta: (name, metrics) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
         let ingresos = metrics['Ingresos'];
@@ -21,8 +21,8 @@ export const fun_indicators = {
     },
     utilidad_operativa: (name, metrics, indicators) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
         let utilidad_bruta = indicators['utilidad_bruta'];
@@ -43,8 +43,8 @@ export const fun_indicators = {
     },
     utilidad_neta: (name, metrics, indicators) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
         let utilidad_operativa = indicators['utilidad_operativa'];
@@ -64,8 +64,8 @@ export const fun_indicators = {
     },
     roe: (name, metrics, indicators) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
         let utilidad_neta = indicators['utilidad_neta']
@@ -84,8 +84,8 @@ export const fun_indicators = {
     },
     roa: (name, metrics, indicators) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
         let utilidad_neta = indicators['utilidad_neta'];
@@ -104,12 +104,12 @@ export const fun_indicators = {
     },
     rotacion_de_activos: (name, metrics) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
-        let ventas = metrics['Ingresos'];
-        let activos_totales = ['Activo'];
+        let ventas = metrics['Ingresos'] || res;
+        let activos_totales = ['Activo'] || res;
 
         for (let i in res) {
             res[i] = ventas[i] / activos_totales[i];
@@ -124,8 +124,8 @@ export const fun_indicators = {
     },
     rotacion_de_inventarios: (name, metrics) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
         let costo_de_venta = metrics['Costo de venta y/o servicio'];
@@ -144,8 +144,8 @@ export const fun_indicators = {
     },
     rotacion_cuentas_por_cobrar: (name, metrics) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
         let cuentas_por_cobrar = metrics['Cuentas y documentos por cobrar a c.p.'] || res;
@@ -164,8 +164,8 @@ export const fun_indicators = {
     },
     rotacion_cuentas_por_pagar: (name, metrics) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
         let costo_de_venta = metrics['Costo de venta y/o servicio'];
@@ -184,8 +184,8 @@ export const fun_indicators = {
     },
     razon_circulante: (name, metrics) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
         let activos_circulantes = metrics['Activo a corto plazo'];
@@ -204,8 +204,8 @@ export const fun_indicators = {
     },
     razon_rapida: (name, metrics) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
         let activos_circulantes = metrics['Activo a corto plazo'];
@@ -228,8 +228,8 @@ export const fun_indicators = {
     },
     cobertura_deuda: (name, metrics, indicators) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
         let utilidad_operativa = indicators['utilidad_operativa'];
@@ -248,8 +248,8 @@ export const fun_indicators = {
     },
     dias_cuentas_por_cobrar: (name, metrics, indicators) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
         let rotacion_cuentas_por_cobrar = indicators['rotacion_cuentas_por_cobrar'];
@@ -267,8 +267,8 @@ export const fun_indicators = {
     },
     dias_de_inventario: (name, metrics, indicators) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
         let rotacion_de_inventarios = indicators['rotacion_de_inventarios'];
@@ -286,8 +286,8 @@ export const fun_indicators = {
     },
     dias_cuentas_por_pagar: (name, metrics, indicators) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
         let rotacion_cuentas_por_pagar = indicators['rotacion_cuentas_por_pagar'];
@@ -305,8 +305,8 @@ export const fun_indicators = {
     },
     ciclo_conversion_de_efectivo: (name, metrics, indicators) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
         let dias_cuentas_por_cobrar = indicators['dias_cuentas_por_cobrar'];
@@ -326,12 +326,12 @@ export const fun_indicators = {
     },
     capital_empleado: (name, metrics) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
-        let activos_totales = ['Activo'];
-        let pasivos_circulantes = metrics['Pasivo a corto plazo'];
+        let activos_totales = ['Activo'] || res;
+        let pasivos_circulantes = metrics['Pasivo a corto plazo'] || res;
 
         for (let i in res) {
             res[i] = activos_totales[i] - pasivos_circulantes[i];
@@ -346,12 +346,12 @@ export const fun_indicators = {
     },
     rotacion_de_capital_empleado: (name, metrics, indicators) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
-        let ventas = metrics['Ingresos'];
-        let capital_empleado = indicators['capital_empleado'];
+        let ventas = metrics['Ingresos'] || res;
+        let capital_empleado = indicators['capital_empleado'] || res;
 
         for (let i in res) {
             res[i] = ventas[i] - capital_empleado[i];
@@ -366,12 +366,12 @@ export const fun_indicators = {
     },
     roce: (name, metrics, indicators) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
-        let utilidad_operativa = indicators['utilidad_operativa'];
-        let capital_empleado = indicators['capital_empleado'];
+        let utilidad_operativa = indicators['utilidad_operativa'] || res;
+        let capital_empleado = indicators['capital_empleado'] || res;
 
         const ISR = 0.3;
         const const_val = 1 - ISR;
@@ -389,8 +389,8 @@ export const fun_indicators = {
     },
     razon_de_apalancamiento: (name, metrics) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
         let pasivos_totales = metrics['Pasivo'];
@@ -409,8 +409,8 @@ export const fun_indicators = {
     },
     deuda_neta_ebit: (name, metrics, indicators) => {
         let res = {
-            ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
-            jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+            ene: 1.0, feb: 1.0, mar: 1.0, abr: 1.0, may: 1.0, jun: 1.0,
+            jul: 1.0, ago: 1.0, sep: 1.0, oct: 1.0, nov: 1.0, dic: 1.0, sum: 1.0
         };
 
         let deuda = metrics['Deuda total'];
