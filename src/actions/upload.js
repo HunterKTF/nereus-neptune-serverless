@@ -32,6 +32,7 @@ export async function TransformData(worksheet, max_rows) {
     // Declare pointer variables 
     let account_num, account_name;
     let breaker, cargos, abonos, date;
+    let saldo_inicial;
 
     // Declare dynamic analytics data
     let groupedData = {};
@@ -57,6 +58,9 @@ export async function TransformData(worksheet, max_rows) {
         cargos = worksheet[`F${i}`] || { v: 0 };
         abonos = worksheet[`G${i}`] || { v: 0 };
 
+        // Get the initial amount using position H
+        saldo_inicial = worksheet[`H${i}`] || { v: 0 };
+
         // Look for subaccounts
         if (account_num.v != ' ' && account_num.v.includes('-')) {
             // Set new account
@@ -64,13 +68,16 @@ export async function TransformData(worksheet, max_rows) {
 
             // Filter for sub- or micro-accounts
             if (accounts[1] !== '00') {
+                // Get account information
                 sub_account = accounts[0] + '-' + accounts[1] + '-000';
                 account_group = parseInt(accounts[0][0] + '00');
+
+                // Reset account data for each sub and micro account
                 if (account_group in groupedData) { }
                 else {
                     groupedData[account_group] = {};
                 }
-                account_data = { year: 0, cargos: {}, abonos: {} };
+                account_data = { year: 0, cargos: {}, abonos: {}, saldo: saldo_inicial.v };
                 data_cargos = {
                     ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
                     jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
@@ -189,10 +196,10 @@ export async function ParseMetrics(dataBook, clientId) {
     // console.log(db_metrics);
     // console.log(index_metrics);
 
-    ParseIndicators(index_metrics);
+    let db_kpis = await ParseIndicators(index_metrics);
 
     // Return the ordered metrics
-    return db_metrics;
+    return [db_metrics, db_kpis];
 }
 
 async function sumByGroup(accounts, sums, takes) {
@@ -205,7 +212,8 @@ async function sumByGroup(accounts, sums, takes) {
     // Iterate over group elements
     for (let subaccount in accounts) {
         for (let index in data_list) {
-            data_list[index] += accounts[subaccount][sums][index] - accounts[subaccount][takes][index];
+            accounts[subaccount]['saldo'] += accounts[subaccount][sums][index] - accounts[subaccount][takes][index];
+            data_list[index] += accounts[subaccount]['saldo'];
         }
         year = accounts[subaccount]['year'];
     }
@@ -231,7 +239,8 @@ async function sumByReq(accounts, req, sums, takes) {
         let subaccount = req[elements];  // Declare subaccounts and verify existing data
         if (subaccount in accounts) {  // Check if subaccount exists
             for (let index in data_list) {
-                data_list[index] += accounts[subaccount][sums][index] - accounts[subaccount][takes][index];
+                accounts[subaccount]['saldo'] += accounts[subaccount][sums][index] - accounts[subaccount][takes][index];
+                data_list[index] = accounts[subaccount]['saldo'];
             }
             year = accounts[subaccount]['year'];
         }
@@ -247,21 +256,23 @@ async function sumByReq(accounts, req, sums, takes) {
 }
 
 async function ParseIndicators(metrics) {
-    let kpi_index = {};
+    let db_kpi = [];
+    let index_kpi = {};
     let indicators = kpiBlueprints.indicators;
 
     let res;
     for (let kpi in indicators) {
         let i = indicators[kpi];
         if (i.indicator) {
-            res = fun_indicators[i.code](i.name, metrics, kpi_index);
+            res = fun_indicators[i.code](i.name, metrics, index_kpi);
         } else {
             res = fun_indicators[i.code](i.name, metrics);
         }
-        kpi_index[i.code] = res;
+        index_kpi[i.code] = res;
+        db_kpi.push(res);
     }
 
-    console.log(kpi_index);
+    // console.log(db_kpi);
 
-    return [];
+    return db_kpi;
 }

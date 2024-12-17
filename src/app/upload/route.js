@@ -48,7 +48,8 @@ export async function POST(request) {
       const dataBook = await ParseData(buffer);
 
       // Parse dataBook into metrics to post to MongoDB
-      const metrics = await ParseMetrics(dataBook, clientId);
+      const [metrics, kpis] = await ParseMetrics(dataBook, clientId);
+      console.log(kpis);
 
       // Upload transformed metrics into MongoDB
       // const response = await uploadToMongo(metrics);
