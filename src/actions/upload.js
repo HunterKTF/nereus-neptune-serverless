@@ -149,6 +149,9 @@ export async function ParseMetrics(dataBook, clientId) {
         let sums = metrics_ref[line].sums;
         let takes = metrics_ref[line].takes;
 
+        // Check if requires to add initial balance
+        let saldo = metrics_ref[line].saldo;
+
         let accounts;
 
         // Redirect to function with multiple groups
@@ -169,12 +172,22 @@ export async function ParseMetrics(dataBook, clientId) {
 
         // Check for metric condition as group or requirements
         if (Number.isInteger(req)) {
-            // Pass data to local function and extract temporal metric value
-            tmp_metric = await sumByGroup(accounts, sums, takes);
+            if (saldo) {
+                // Pass data to local function and extract temporal metric value
+                tmp_metric = await sumByGroup(accounts, sums, takes);
+            }
+            else {
+                tmp_metric = await sumGroupCount(accounts, sums, takes);
+            }
 
         } else {
-            // Pass data to local function and extract temporal metric value
-            tmp_metric = await sumByReq(accounts, req, sums, takes);
+            if (saldo) {
+                // Pass data to local function and extract temporal metric value
+                tmp_metric = await sumByReq(accounts, req, sums, takes);
+            }
+            else {
+                tmp_metric = await sumReqCount(accounts, req, sums, takes);
+            }
 
         }
 
@@ -193,7 +206,7 @@ export async function ParseMetrics(dataBook, clientId) {
     }
 
     // Test return of completed database metrics
-    // console.log(db_metrics);
+    console.log(db_metrics);
     // console.log(index_metrics);
 
     let db_kpis = await ParseIndicators(index_metrics);
@@ -227,6 +240,30 @@ async function sumByGroup(accounts, sums, takes) {
     };
 }
 
+async function sumGroupCount(accounts, sums, takes) {
+    let data_list = {
+        ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+        jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+    };
+    let year = '';
+
+    // Iterate over group elements
+    for (let subaccount in accounts) {
+        for (let index in data_list) {
+            data_list[index] = accounts[subaccount][sums][index] - accounts[subaccount][takes][index];
+        }
+        year = accounts[subaccount]['year'];
+    }
+
+    return {
+        ene: data_list.ene.toFixed(2), feb: data_list.feb.toFixed(2), mar: data_list.mar.toFixed(2),
+        abr: data_list.abr.toFixed(2), may: data_list.may.toFixed(2), jun: data_list.jun.toFixed(2),
+        jul: data_list.jul.toFixed(2), ago: data_list.ago.toFixed(2), sep: data_list.sep.toFixed(2),
+        oct: data_list.oct.toFixed(2), nov: data_list.nov.toFixed(2), dic: data_list.dic.toFixed(2),
+        sum: data_list.sum.toFixed(2), year: year
+    };
+}
+
 async function sumByReq(accounts, req, sums, takes) {
     let data_list = {
         ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
@@ -240,7 +277,34 @@ async function sumByReq(accounts, req, sums, takes) {
         if (subaccount in accounts) {  // Check if subaccount exists
             for (let index in data_list) {
                 accounts[subaccount]['saldo'] += accounts[subaccount][sums][index] - accounts[subaccount][takes][index];
-                data_list[index] = accounts[subaccount]['saldo'];
+                data_list[index] += accounts[subaccount]['saldo'];
+            }
+            year = accounts[subaccount]['year'];
+        }
+    }
+
+    return {
+        ene: data_list.ene.toFixed(2), feb: data_list.feb.toFixed(2), mar: data_list.mar.toFixed(2),
+        abr: data_list.abr.toFixed(2), may: data_list.may.toFixed(2), jun: data_list.jun.toFixed(2),
+        jul: data_list.jul.toFixed(2), ago: data_list.ago.toFixed(2), sep: data_list.sep.toFixed(2),
+        oct: data_list.oct.toFixed(2), nov: data_list.nov.toFixed(2), dic: data_list.dic.toFixed(2),
+        sum: data_list.sum.toFixed(2), year: year
+    };
+}
+
+async function sumReqCount(accounts, req, sums, takes) {
+    let data_list = {
+        ene: 0.0, feb: 0.0, mar: 0.0, abr: 0.0, may: 0.0, jun: 0.0,
+        jul: 0.0, ago: 0.0, sep: 0.0, oct: 0.0, nov: 0.0, dic: 0.0, sum: 0.0
+    };
+    let year = '';
+
+    // Iterate over requirement list elements
+    for (let elements in req) {
+        let subaccount = req[elements];  // Declare subaccounts and verify existing data
+        if (subaccount in accounts) {  // Check if subaccount exists
+            for (let index in data_list) {
+                data_list[index] = accounts[subaccount][sums][index] - accounts[subaccount][takes][index];
             }
             year = accounts[subaccount]['year'];
         }

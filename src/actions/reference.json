@@ -5,7 +5,8 @@
             "group": 100,
             "requires": 100,
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Activo a corto plazo",
@@ -28,70 +29,80 @@
                 "120-03-000", "120-04-000", "121-01-000"
             ],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Caja",
             "group": 100,
             "requires": ["101-01-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Bancos",
             "group": 100,
             "requires": ["102-01-000", "102-02-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Bancos nacionales",
             "group": 100,
             "requires": ["102-01-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Bancos extranjeros",
             "group": 100,
             "requires": ["102-02-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Inversiones",
             "group": 100,
             "requires": ["103-01-000", "103-02-000", "103-03-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Otros instrumentos financieros",
             "group": 100,
             "requires": ["104-01-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Clientes",
             "group": 100,
             "requires": ["105-01-000", "105-02-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Clientes nacionales",
             "group": 100,
             "requires": ["105-01-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Clientes extranjeros",
             "group": 100,
             "requires": ["105-02-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Cuentas y documentos por cobrar a c.p.",
@@ -101,21 +112,24 @@
                 "106-07-000", "106-08-000", "106-09-000", "106-10-000"
             ],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Deudores diversos",
             "group": 100,
             "requires": ["107-01-000", "107-02-000", "107-03-000", "107-04-000", "107-05-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Estimación de cuentas incobrables",
             "group": 100,
             "requires": ["108-01-000", "108-02-000", "108-03-000", "108-04-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Pagos anticipados",
@@ -127,28 +141,32 @@
                 "109-19-000", "109-20-000", "109-21-000", "109-22-000", "109-23-000"
             ],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Subsidio al empleo por aplicar",
             "group": 100,
             "requires": ["110-01-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Crédito al diesel por aplicar",
             "group": 100,
             "requires": ["111-01-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Otros estímulos",
             "group": 100,
             "requires": ["112-01-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Impuestos a favor",
@@ -158,49 +176,56 @@
                 "113-07-000", "113-08-000"
             ],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "IVA a favor",
             "group": 100,
             "requires": ["113-01-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "ISR a favor",
             "group": 100,
             "requires": ["113-02-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Subsidio al empleo",
             "group": 100,
             "requires": ["113-06-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Pago de lo indebido",
             "group": 100,
             "requires": ["113-07-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Otros impuestos a favor",
             "group": 100,
             "requires": ["113-08-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Pagos provisionales",
             "group": 100,
             "requires": ["114-01-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Inventario",
@@ -210,140 +235,160 @@
                 "115-07-000"
             ],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Materia prima y materiales",
             "group": 100,
             "requires": ["115-02-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Producción en proceso",
             "group": 100,
             "requires": ["115-03-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Productos terminados",
             "group": 100,
             "requires": ["115-04-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Mercancías en tránsito",
             "group": 100,
             "requires": ["115-05-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Mercancías en poder de terceros",
             "group": 100,
             "requires": ["115-06-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Otros inventarios",
             "group": 100,
             "requires": ["115-07-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Impuestos acreditables pagados",
             "group": 100,
             "requires": ["118-01-000", "118-02-000", "118-03-000", "118-04-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "IVA acreditable de importación pagado",
             "group": 100,
             "requires": ["118-02-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "IEPS acreditable pagado",
             "group": 100,
             "requires": ["118-03-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "IEPS pagado en importación",
             "group": 100,
             "requires": ["118-04-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Impuestos acreditables por pagar",
             "group": 100,
             "requires": ["119-01-000", "119-02-000", "119-03-000", "119-04-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "IVA pendiente de pago",
             "group": 100,
             "requires": ["119-01-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "IVA de importación pendiente de pago",
             "group": 100,
             "requires": ["119-02-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "IEPS pendiente de pago",
             "group": 100,
             "requires": ["119-03-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "IEPS pendiente de pago en importación",
             "group": 100,
             "requires": ["119-04-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Anticipo a proveedores",
             "group": 100,
             "requires": ["120-01-000", "120-02-000", "120-03-000", "120-04-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Otros activos a corto plazo",
             "group": 100,
             "requires": ["121-01-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Impuestos",
             "group": [100, 200],
             "requires": ["118-01-000", "118-02-000", "118-03-000", "118-04-000", "208-01-000", "208-02-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": false
         },
         {
             "name": "Pasivo",
             "group": 200,
             "requires": 200,
             "sums": "abonos",
-            "takes": "cargos"
+            "takes": "cargos",
+            "saldo": true
         },
         {
             "name": "Pasivo a corto plazo",
@@ -366,7 +411,8 @@
                 "216-10-000", "216-11-000", "216-12-000", "217-01-000", "218-01-000"
             ],
             "sums": "abonos",
-            "takes": "cargos"
+            "takes": "cargos",
+            "saldo": true
         },
         {
             "name": "Cuentas por pagar a corto plazo",
@@ -376,21 +422,24 @@
                 "202-07-000", "202-08-000", "202-09-000", "202-10-000", "202-11-000", "202-12-000"
             ],
             "sums": "abonos",
-            "takes": "cargos"
+            "takes": "cargos",
+            "saldo": true
         },
         {
             "name": "Deuda a corto plazo",
             "group": 200,
             "requires": ["205-01-000", "205-02-000", "205-03-000", "205-04-000", "205-05-000", "205-06-000"],
             "sums": "abonos",
-            "takes": "cargos"
+            "takes": "cargos",
+            "saldo": true
         },
         {
             "name": "Deuda a largo plazo",
             "group": 200,
             "requires": ["251-01-000", "251-02-000", "251-03-000", "251-04-000", "251-05-000", "251-06-000"],
             "sums": "abonos",
-            "takes": "cargos"
+            "takes": "cargos",
+            "saldo": true
         },
         {
             "name": "Deuda total",
@@ -400,14 +449,16 @@
                 "251-01-000", "251-02-000", "251-03-000", "251-04-000", "251-05-000", "251-06-000"
             ],
             "sums": "abonos",
-            "takes": "cargos"
+            "takes": "cargos",
+            "saldo": true
         },
         {
             "name": "Capital contable",
             "group": 300,
             "requires": 300,
             "sums": "abonos",
-            "takes": "cargos"
+            "takes": "cargos",
+            "saldo": true
         },
         {
             "name": "Ingresos",
@@ -416,14 +467,16 @@
                 "403-01-000", "403-02-000", "403-03-000", "403-04-000", "403-05-000", "403-06-000",
                 "403-07-000"],
             "sums": "abonos",
-            "takes": "cargos"
+            "takes": "cargos",
+            "saldo": false
         },
         {
             "name": "Costos",
             "group": 500,
             "requires": 500,
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Costo de venta y/o servicio",
@@ -433,14 +486,16 @@
                 "501-07-000", "501-08-000"
             ],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": false
         },
         {
             "name": "Gastos",
             "group": 600,
             "requires": 600,
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": false
         },
         {
             "name": "Depreciacion contable",
@@ -451,7 +506,8 @@
                 "613-13-000", "613-14-000", "613-15-000", "613-16-000", "613-17-000", "613-18-000"
             ],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": false
         },
         {
             "name": "Amortizacion contable",
@@ -461,21 +517,24 @@
                 "614-07-000", "614-08-000", "614-09-000", "614-10-000"
             ],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": false
         },
         {
             "name": "Resultado integral de financiamiento",
             "group": 700,
             "requires": 700,
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": true
         },
         {
             "name": "Intereses",
             "group": 700,
             "requires": ["701-04-000", "701-05-000", "701-06-000", "701-07-000", "701-08-000", "701-09-000"],
             "sums": "cargos",
-            "takes": "abonos"
+            "takes": "abonos",
+            "saldo": false
         }
     ]
 }
