@@ -73,7 +73,7 @@ export async function POST(request) {
 
         return Response.json(response);
     } catch (e) {
-        console.log(e);
-        return Response.json({ message: "Could not download data correctly", status: 400 });
+        // console.log(e);
+        return Response.json({ message: "Could not download data correctly", data: [], error: [e] });
     }
 }
