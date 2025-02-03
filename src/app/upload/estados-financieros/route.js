@@ -35,6 +35,10 @@ export async function POST (request) {
         else {
             const message = "Correctly uploaded files";
             console.log(message);
+
+            const file = Buffer.from(await balance.arrayBuffer());
+            
+            const dataBook = await ParseDataBalance(file, clientId, year);
             return Response.json({ message: message, status: 200, year: year, clientId: clientId });
         };
     } catch (e) {

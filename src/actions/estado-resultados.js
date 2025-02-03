@@ -1,7 +1,7 @@
 'use server'
 
 import XLSX from "xlsx";
-import kpiBlueprints from './kpiBlueprints.json';
+// import kpiBlueprints from './kpiBlueprints.json';
 
 
 export async function ParseDataEstado(file) {
