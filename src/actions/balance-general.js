@@ -7,7 +7,8 @@ import kpiBlueprints from './kpiBlueprints.json';
 export async function ParseData(file) {
     // Read file from buffered data
     const workbook = XLSX.read(file);
-    const sheetName = workbook.SheetNames[0];
+    console.log(workbook.SheetNames);
+    const sheetName = workbook.SheetNames[1];
     const worksheet = workbook.Sheets[sheetName];
 
     // Get document information
