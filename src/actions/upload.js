@@ -319,7 +319,7 @@ async function sumReqCount(accounts, req, sums, takes) {
     };
 }
 
-async function ParseIndicators(metrics) {
+export async function ParseIndicators(metrics) {
     let db_kpi = [];
     let index_kpi = {};
     let indicators = kpiBlueprints.indicators;

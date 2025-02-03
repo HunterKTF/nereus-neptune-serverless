@@ -2,6 +2,7 @@
 
 import { ParseDataBalance } from "@/actions/balance-general";
 import { ParseDataEstado } from "@/actions/estado-resultados";
+import { ParseIndicators } from "@/actions/upload";
 
 import { connectToDB } from "@/utils/mongodb";
 
@@ -36,10 +37,23 @@ export async function POST (request) {
             const message = "Correctly uploaded files";
             console.log(message);
 
-            const file = Buffer.from(await balance.arrayBuffer());
+            const fileBalance = Buffer.from(await balance.arrayBuffer());
+            const fileEstado = Buffer.from(await estado.arrayBuffer());
             
-            const dataBook = await ParseDataBalance(file, clientId, year);
-            return Response.json({ message: message, status: 200, year: year, clientId: clientId });
+            let db_balance = await ParseDataBalance(fileBalance, clientId, year);
+            let db_estado = await ParseDataEstado(fileEstado, clientId, year);
+
+            const metrics = { ...db_balance, ...db_estado };
+            let metrics_idx = {};
+
+            for (let idx in metrics) {
+                let name = metrics[idx].name;
+                metrics_idx[name] = { ...metrics[idx] };
+            }
+
+            let kpis = await ParseIndicators(metrics_idx);
+
+            return Response.json({ message: message, status: 200, year: year, clientId: clientId, dict: kpis });
         };
     } catch (e) {
         console.log(e);

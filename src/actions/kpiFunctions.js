@@ -66,20 +66,25 @@ export const fun_indicators = {
         let utilidad_operativa = indicators['utilidad_operativa'];
         let intereses = metrics['Intereses'] || res;
         let impuestos = metrics['Impuestos'];
+        let utilidad = metrics['Utilidad Neta'];
 
-        if (utilidad_operativa !== undefined && impuestos !== undefined) {
-            for (let i in res) {
-                res[i] = utilidad_operativa[i] - intereses[i] - impuestos[i];
-            }
-    
-            res.year = utilidad_operativa['year'];
-            res.client_id = utilidad_operativa['client_id'];
-            res.name = name;
-    
-            console.log(`Calculando... ${name}`);
-            return res;
+        if (utilidad !== undefined) {
+            return utilidad;
         } else {
-            return res;
+            if (utilidad_operativa !== undefined && impuestos !== undefined) {
+                for (let i in res) {
+                    res[i] = utilidad_operativa[i] - intereses[i] - impuestos[i];
+                }
+        
+                res.year = utilidad_operativa['year'];
+                res.client_id = utilidad_operativa['client_id'];
+                res.name = name;
+        
+                console.log(`Calculando... ${name}`);
+                return res;
+            } else {
+                return res;
+            }
         }
     },
 
