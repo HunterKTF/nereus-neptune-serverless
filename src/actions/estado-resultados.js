@@ -4,7 +4,7 @@ import XLSX from "xlsx";
 import kpiBlueprints from './kpiBlueprints.json';
 
 
-export async function ParseData(file) {
+export async function ParseDataEstado(file) {
     // Read file from buffered data
     const workbook = XLSX.read(file);
     const sheetName = workbook.SheetNames[0];

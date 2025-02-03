@@ -20,7 +20,7 @@ export async function POST (request) {
         } else {
             const buffer = Buffer.from(await file.arrayBuffer());
 
-            const dataBook = await ParseData(buffer);
+            const dataBook = await ParseData(buffer, clientId);
 
             return Response.json({ message: "Balance General uploaded correctly", data: dataBook, status: 201 })
         }
