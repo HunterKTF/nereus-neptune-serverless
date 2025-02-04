@@ -7,7 +7,6 @@ import { ParseIndicators } from "@/actions/upload";
 import { connectToDB } from "@/utils/mongodb";
 
 
-// Upload to MongoDB
 // Function to upload data to MongoDB
 async function uploadToMongo(metrics, kpis) {
     try {
