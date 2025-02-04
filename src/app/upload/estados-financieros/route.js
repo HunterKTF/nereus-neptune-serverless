@@ -70,16 +70,20 @@ export async function POST (request) {
 
             const metrics = { ...db_balance, ...db_estado };
             let metrics_idx = {};
+            let metrics_db = [];
 
             for (let idx in metrics) {
                 let name = metrics[idx].name;
                 metrics_idx[name] = { ...metrics[idx] };
+
+                let data = metrics[idx];
+                metrics_db.push(data);
             }
 
             let kpis = await ParseIndicators(metrics_idx);
 
             // Upload transformed metrics into MongoDB
-            const response = await uploadToMongo(metrics, kpis);
+            const response = await uploadToMongo(metrics_db, kpis);
 
             return Response.json(response);
         };
